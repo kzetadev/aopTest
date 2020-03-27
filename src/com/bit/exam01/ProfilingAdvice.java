@@ -4,14 +4,31 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 //공통관심사항
 public class ProfilingAdvice {
-	//예외가 발생하는 advice만 실행
-	public void afterThrowing(JoinPoint joinPoint) {
+	
+	public void afterThrowing(JoinPoint joinPoint, Throwable e) {
 		String methodName = joinPoint.getSignature().toShortString();
 		System.out.println(methodName + "비정상 종료됨.");
+		System.out.println("예외 발생");
+		System.out.println(e);
+		System.out.println("=============");
 	}
-	public void afterReturning(JoinPoint joinPoint) {
+	//예외가 발생하는 advice만 실행
+//	public void afterThrowing(JoinPoint joinPoint) {
+//		String methodName = joinPoint.getSignature().toShortString();
+//		System.out.println(methodName + "비정상 종료됨.");
+//	}
+//	public void afterReturning(JoinPoint joinPoint) {
+//		String methodName = joinPoint.getSignature().toShortString();
+//		System.out.println(methodName + "정상 완료됨.");
+//	}
+	public void afterReturning(JoinPoint joinPoint, Object ret) {
 		String methodName = joinPoint.getSignature().toShortString();
 		System.out.println(methodName + "정상 완료됨.");
+		System.out.println("반환값");
+		System.out.println("=========");
+		System.out.println(ret);
+		System.out.println("=========");
+		
 	}
 	public void after(JoinPoint joinPoint) {
 		String methodName = joinPoint.getSignature().toShortString();
